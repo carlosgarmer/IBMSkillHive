@@ -49,13 +49,19 @@
 
   .IBM-bee{
     position: absolute;
-    width: 550px;
-    height: 550px;
-    left: -20px;
+    width: 450px;
+    height: 450px;
+    left: 20px;
     top: 150 px;
 
     filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
-    transform: rotate(44.89deg);
+  }
+
+  .IBM-bee-Header {
+    width: 4rem;
+    height: 4rem;
+    margin-left: 4.5rem;
+    margin-right: 7rem;
   }
 
   .SignIn-Box{
@@ -179,7 +185,9 @@
   .tableau-container {
     justify-content: center;
     align-items: center;
-    height: 100%;
+    width: 100vw;
+    height: 100vh;
+    grid-column: span 2;
   }
   
   .background-s{
@@ -208,7 +216,7 @@
     background-color: #E5E0DF;
   
     grid-template-columns: 15rem auto;
-    grid-template-rows: 7rem auto;
+    grid-template-rows: 5.5rem auto;
   
   }
  
@@ -231,14 +239,14 @@
   flex-direction: row;
   position: relative;
   justify-content: center;
-  padding-top: 1rem;
+  padding-top: 0.5rem;
   align-items: center;
   transition: all 300ms ease;
   font-family: 'IBM Plex Sans';
   font-style: normal;
+  justify-content: start;
   font-weight: 120;
-  font-size: 5vw; /* use viewport width to make the font size responsive */
-  line-height: 1.2; /* use a unitless value for line-height */
+  font-size: 2rem; /* use viewport width to make the font size responsive */
   letter-spacing: -0.01em; 
   color: #F5F5F5;
 }

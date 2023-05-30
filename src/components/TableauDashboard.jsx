@@ -10,7 +10,7 @@ useEffect(() => {
   }, []);
 
   return (
-    <div id="tableauViz" style={{ margin: '0 auto', display: 'block', width: '60vw', height: '40vw' }}></div>
+    <div id="tableauViz" className='tableau-container'></div>
   );
 
 };

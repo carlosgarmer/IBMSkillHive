@@ -3,10 +3,11 @@ import { Link } from "react-router-dom";
 import Sidebar from '../components/Sidebar';
 import MainDash from "../components/MainDash" ;
 import { auth } from "../firebase";
+import Header from "../components/Header";
 
 export default () => (
     <div className="Glass">
-        <div className="Welcome">Welcome, {auth.currentUser.email}</div>
+        <Header  title="Welcome, " subtitle={auth.currentUser.email}/>
         <Sidebar/>
         <div className="content">   
             <div className="content-dashboard">

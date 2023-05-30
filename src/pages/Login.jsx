@@ -10,17 +10,17 @@ export default () => {
   const [password,setPassword] = useState("");
   const [hasError,setHasError] = useState(false);
   const navigate = useNavigate();
-  useEffect(()=>{
-    console.log(auth.currentUser);
-    if (auth.currentUser){
-      navigate("/overview/index");
-    }
-  },[])
+  // useEffect(()=>{
+  //   console.log(auth.currentUser);
+  //   if (auth.currentUser){
+  //     navigate("/overview/index");
+  //   }
+  // },[])
 
   const loginHandler = async(email,password)=> {
     try {
       const user = await signInWithEmailAndPassword(auth,email, password);
-      navigate("/overview/index");
+      // navigate("/overview/index");
     } catch (error) {
       setHasError(true);
     }
@@ -31,7 +31,7 @@ export default () => {
       width: "100vw",
       height: "100vh",
     }}>
-      <Bee />
+      <Bee className="IBM-bee"/>
       <p className="IBM-name">IBM's</p>
       <p className="SkillHive-name">SkillHive</p>
       <div className="SignIn-Box">

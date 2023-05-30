@@ -1,10 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import Sidebar from '../components/Sidebar';
+import Header from "../components/Header";
 
 export default () => (
     <div className="Glass">
-        <div className="Welcome">Teams</div>
+        <Header  title="" subtitle="Teams"/>
         <Sidebar/>
 
     </div>

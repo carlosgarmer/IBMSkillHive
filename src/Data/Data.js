@@ -13,7 +13,7 @@ export const SidebarData = [
     {
         icon: UilEstate,
         heading: "Overview",
-        path: "/overview/index"
+        path: "/"
     }, 
     {
         icon: UilUsersAlt,
