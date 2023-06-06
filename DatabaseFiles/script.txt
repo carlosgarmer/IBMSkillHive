@@ -6,7 +6,7 @@ CREATE TABLE IF NOT EXISTS Teams(
     PRIMARY KEY(teamID)
 );
 CREATE TABLE IF NOT EXISTS Employees(
-    employeeID VARCHAR(8),
+    employeesID VARCHAR(8),
     name VARCHAR(255)
     teamID VARCHAR(8),
     email VARCHAR(255),
