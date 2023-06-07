@@ -1,16 +1,16 @@
-CREATE DATABASE IF NOT EXISTS skillhive;
-USE skillhive;
+CREATE DATABASE IF NOT EXISTS ibmskillhive;
+USE ibmskillhive;
 CREATE TABLE IF NOT EXISTS Teams(
-    teamID VARCHAR(8),
-    name VARCHAR(25),
+    teamID VARCHAR(64),
+    name VARCHAR(64),
     PRIMARY KEY(teamID)
 );
 CREATE TABLE IF NOT EXISTS Employees(
-    employeesID VARCHAR(8),
+    employeesID VARCHAR(64),
     name VARCHAR(255),
     teamID VARCHAR(8),
     email VARCHAR(255),
-    PRIMARY KEY(employeeID),
+    PRIMARY KEY(employeesID),
     FOREIGN KEY(teamID) REFERENCES Teams(teamID)
 );
 CREATE TABLE IF NOT EXISTS Skills(
@@ -27,10 +27,12 @@ CREATE TABLE IF NOT EXISTS Types(
     PRIMARY KEY (typeID) 
 );
 CREATE TABLE IF NOT EXISTS Certifications(
-    certificationID VARCHAR(8),
-    employeeID VARCHAR(8),
+    certificationID VARCHAR(64),
+    employeeID VARCHAR(64),
     typeID VARCHAR (64),
+    skillsID VARCHAR (64),
     PRIMARY KEY (certificationID),
     FOREIGN KEY (employeeID) REFERENCES Employees (employeesID),
-    FOREIGN KEY (typeID) REFERENCES Types (typeID)
+    FOREIGN KEY (typeID) REFERENCES Types (typeID),
+    FOREIGN KEY (skillsID) REFERENCES Skills (skillsID)
 );
