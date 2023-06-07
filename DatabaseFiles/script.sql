@@ -8,7 +8,7 @@ CREATE TABLE IF NOT EXISTS Teams(
 CREATE TABLE IF NOT EXISTS Employees(
     employeesID VARCHAR(64),
     name VARCHAR(255),
-    teamID VARCHAR(8),
+    teamID VARCHAR(64),
     email VARCHAR(255),
     PRIMARY KEY(employeesID),
     FOREIGN KEY(teamID) REFERENCES Teams(teamID)
@@ -24,15 +24,15 @@ CREATE TABLE IF NOT EXISTS Types(
     type VARCHAR(1000),
     url VARCHAR(1000),
     image VARCHAR(1000),
-    PRIMARY KEY (typeID) 
+    skillsID VARCHAR (64),
+    PRIMARY KEY (typeID),
+    FOREIGN KEY (skillsID) REFERENCES Skills (skillsID)
 );
 CREATE TABLE IF NOT EXISTS Certifications(
     certificationID VARCHAR(64),
     employeeID VARCHAR(64),
     typeID VARCHAR (64),
-    skillsID VARCHAR (64),
     PRIMARY KEY (certificationID),
     FOREIGN KEY (employeeID) REFERENCES Employees (employeesID),
-    FOREIGN KEY (typeID) REFERENCES Types (typeID),
-    FOREIGN KEY (skillsID) REFERENCES Skills (skillsID)
+    FOREIGN KEY (typeID) REFERENCES Types (typeID)
 );
