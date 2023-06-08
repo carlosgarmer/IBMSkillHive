@@ -21,8 +21,14 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Build
-        run: npm run build
-      
       - name: Run tests
         run: npm test
+
+      - name: Generate Report
+        run: npm run generate-report
+
+      - name: Archive Report
+        uses: actions/upload-artifact@v2
+        with:
+          name: report
+          path: path/to/report
