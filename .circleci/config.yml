@@ -1,26 +1,72 @@
-# Use the latest 2.1 version of CircleCI pipeline process engine.
-# See: https://circleci.com/docs/configuration-reference
 version: 2.1
+workflows:
+  version: 2
+  build_and_deploy:
+    jobs:
+      - build
+      - deploy_firebase:
+          requires:
+            - build
+          filters:
+            branches:
+              only: main
 
-# Define a job to be invoked later in a workflow.
-# See: https://circleci.com/docs/configuration-reference/#jobs
 jobs:
-  say-hello:
-    # Specify the execution environment. You can specify an image from Docker Hub or use one of our convenience images from CircleCI's Developer Hub.
-    # See: https://circleci.com/docs/configuration-reference/#executor-job
+  build:
     docker:
-      - image: cimg/base:stable
-    # Add steps to the job
-    # See: https://circleci.com/docs/configuration-reference/#steps
+      - image: circleci/node:14
     steps:
       - checkout
-      - run:
-          name: "Say hello"
-          command: "echo Hello, World!"
 
-# Orchestrate jobs using workflows
-# See: https://circleci.com/docs/configuration-reference/#workflows
-workflows:
-  say-hello-workflow:
-    jobs:
-      - say-hello
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "package.json" }}
+            - v1-dependencies-
+
+      - run:
+          name: Install dependencies
+          command: npm install
+
+      - run:
+          name: Build
+          command: npm run build
+
+      - run:
+          name: Run tests
+          command: npm test
+
+      - save_cache:
+          key: v1-dependencies-{{ checksum "package.json" }}
+          paths:
+            - ./node_modules
+
+      - store_artifacts:
+          path: path/to/report
+          destination: report
+
+deploy_firebase:
+    docker:
+      - image: circleci/node:14
+    steps:
+      - checkout
+
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "package.json" }}
+            - v1-dependencies-
+
+      - run:
+          name: Install dependencies
+          command: npm ci
+
+      - run:
+          name: Build
+          command: npm run build
+
+      - run:
+          name: Deploy to Firebase Hosting
+          env:
+            FIREBASE_TOKEN: $FIREBASE_TOKEN
+          command: |
+            npm install -g firebase-tools
+            firebase deploy --token $FIREBASE_TOKEN --project ibmskillhive --channel live
