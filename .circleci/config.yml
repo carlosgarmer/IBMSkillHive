@@ -1,0 +1,72 @@
+version: 2.1
+workflows:
+  version: 2
+  build_and_deploy:
+    jobs:
+      - build
+      - deploy_firebase:
+          requires:
+            - build
+          filters:
+            branches:
+              only: main
+
+jobs:
+  build:
+    docker:
+      - image: circleci/node:14
+    steps:
+      - checkout
+
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "package.json" }}
+            - v1-dependencies-
+
+      - run:
+          name: Install dependencies
+          command: npm install
+
+      - run:
+          name: Build
+          command: npm run build
+
+      - run:
+          name: Run tests
+          command: npm test
+
+      - save_cache:
+          key: v1-dependencies-{{ checksum "package.json" }}
+          paths:
+            - ./node_modules
+
+      - store_artifacts:
+          path: path/to/report
+          destination: report
+
+deploy_firebase:
+    docker:
+      - image: circleci/node:14
+    steps:
+      - checkout
+
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "package.json" }}
+            - v1-dependencies-
+
+      - run:
+          name: Install dependencies
+          command: npm ci
+
+      - run:
+          name: Build
+          command: npm run build
+
+      - run:
+          name: Deploy to Firebase Hosting
+          env:
+            FIREBASE_TOKEN: $FIREBASE_TOKEN
+          command: |
+            npm install -g firebase-tools
+            firebase deploy --token $FIREBASE_TOKEN --project ibmskillhive --channel live
