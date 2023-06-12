@@ -1,9 +1,9 @@
 import React, { useEffect, useRef } from 'react';
 
-const TableauDashboard = () => {
+const TableauGraph = () => {
 useEffect(() => {
     const vizContainer = document.getElementById('tableauViz');
-    const vizUrl = 'https://public.tableau.com/views/Skillhive/DashboardEmployees?:language=es-ES&:display_count=n&:origin=viz_share_link';
+    const vizUrl = 'https://public.tableau.com/views/SkillhiveGraphs/DashboardGraphs?:language=es-ES&:display_count=n&:origin=viz_share_link';
     
     
     const viz = new window.tableau.Viz(vizContainer, vizUrl);
@@ -15,4 +15,4 @@ useEffect(() => {
 
 };
 
-export default TableauDashboard;
+export default TableauGraph;

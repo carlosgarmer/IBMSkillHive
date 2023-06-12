@@ -1,6 +1,6 @@
 import {
     UilEstate,
-    UilClipboard,
+    UilEye,
     UilUsersAlt,
     UilPackage,
     UilChart,
@@ -11,16 +11,17 @@ import {
 // Sidebar DATA
 export const SidebarData = [
     {
-        icon: UilEstate,
+        icon: UilEye,
         heading: "Overview",
         path: "/"
     }, 
     {
         icon: UilUsersAlt,
-        heading: "All Teams",
+        heading: "All Employees",
         path: "/teams/index"
-    },{
-        icon: UilUsersAlt,
+    },
+/* {
+        icon: UilChart,
         heading: "Dashboard",
         path: "/dashboard"
     },
@@ -28,7 +29,7 @@ export const SidebarData = [
         icon: UilChart,
         heading: "Goals",
         path: "/goals/show"
-    },
+    }, */
 ];
 
 export const CardsData = [{
